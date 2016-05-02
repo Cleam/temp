@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8" />
+	<title>新闻头条_东方头条客户端</title>
+	<meta id="viewport" name="viewport" content="target-densitydpi=medium-dpi, width=640, height=device-height, initial-scale=0.5, user-scalable=yes" />
+	<link type="text/css" rel="stylesheet" href="/assets/css/404_reset.css" />
+	<link type="text/css" rel="stylesheet" href="/assets/css/404_error.css" />
+</head>
+<body>
+<div class="dwl_mpns">
+	<div class="dwl_malo">
+		<a class="dwl_maloa1"></a>
+	</div>
+	<div class="dwl_main">
+		<div class="error_m">
+			<div class="error_ml"></div>
+			<div class="error_mr">
+				<p class="error_mrp1">很抱歉！您访问页面被外星人劫持了</p>
+				<p class="error_mrp2">可能原因：</p>
+				<p class="error_mrp3">你要查看的网址可能被删，名称已被<br/>更改，或者暂时不可用</p>
+				<div class="error_mrd"><a href="/">返回首页</a></div>
+			</div>
+		</div>
+		<div class="error_mxq">
+			<p>或许您对以下页面感兴趣...</p>
+			<iframe src="/frames/404_iframe.html" frameborder="0" scrolling="no" width="100%" height="380"></iframe>
+		</div>
+	</div>
+	<div class="st_mbt">
+		<pre><a target="_blank" href="http://shurufa.eastday.com">东方输入法</a> - <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=3155798136&site=qq&menu=yes">联系客服</a> - <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=3155798136&site=qq&menu=yes">广告洽谈</a></pre>
+		<pre>eastday.com All Right Reserve 版权所有　　版权反馈问题：3155798136@qq.com</pre>
+	</div>
+</div>
+</body>
+</htm>

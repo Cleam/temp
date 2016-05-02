@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<!--[if IE 9 ]><html class="ie9"><![endif]-->
+<head>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<meta name="format-detection" content="telephone=no">
+<meta charset="GB2312">
+
+<meta name="description" content="Violate Responsive Admin Template">
+<meta name="keywords" content="Super Admin, Admin, Template, Bootstrap">
+
+<title>CMS后台管理系统</title>
+
+<!-- CSS -->
+<link href="superadmin/css/bootstrap.min.css" rel="stylesheet">
+<link href="superadmin/css/animate.min.css" rel="stylesheet">
+<link href="superadmin/css/font-awesome.min.css" rel="stylesheet">
+<link href="superadmin/css/form.css" rel="stylesheet">
+<link href="superadmin/css/calendar.css" rel="stylesheet">
+<link href="superadmin/css/media-player.css" rel="stylesheet">
+<link href="superadmin/css/style.css" rel="stylesheet">
+<link href="superadmin/css/icons.css" rel="stylesheet">
+<link href="superadmin/css/generics.css" rel="stylesheet">
+<link href="js/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/showLoading.css">
+</head>
+<body onload="ff()" name="body">
+	<header id="header" class="media">
+		<a href="" id="menu-toggle"></a> <a class="logo pull-left"
+			href="index.html">CMS</a>
+
+		<div class="media-body">
+			<div class="media" id="top-menu">
+
+				<div id="time" class="pull-right">
+					<span id="hours"></span> : <span id="min"></span> : <span id="sec"></span>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="clearfix"></div>
+
+	<section id="main" class="p-relative" role="main">
+
+		<!-- Sidebar -->
+
+		<aside id="sidebar">
+			<!-- Sidbar Widgets -->
+			<div class="side-widgets overflow">
+				<!-- Profile Menu -->
+				<div class="text-center s-widget m-b-25 dropdown" id="profile-menu">
+					<a href="" data-toggle="dropdown"> <img
+						class="profile-pic animated" src="superadmin/img/profile-pic.jpg"
+						alt="">
+					</a>
+					<ul class="dropdown-menu profile-menu">
+						<li><a data-toggle="modal" href="#compose-message">修改密码</a> <i
+							class="icon left">&#61903;</i><i class="icon right">&#61815;</i></li>
+						<li><a
+							href="${pageContext.request.contextPath }/loginOut.json">退出登录</a>
+							<i class="icon left">&#61903;</i><i class="icon right">&#61815;</i></li>
+					</ul>
+					<h4 class="m-0">${username}</h4>
+				</div>
+
+				<!-- Calendar -->
+					<div id="sidebar2">
+			<ul>
+			
+			</ul>
+		
+		</div>
+			</div>
+			
+		</aside>
+
+		<!-- Compose -->
+		<div class="modal fade" id="compose-message">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true" onclick="cancelupd()">&times;</button>
+						<h4 class="modal-title" style="text-align: center;">修改密码</h4>
+					</div>
+					<div class="modal-header p-0">
+						<input type="password" id="spwd"
+							class="form-control input-sm input-transparent"
+							placeholder="原密码........"><i
+							style="color: red; padding: 10px;" id="msg1"></i>
+					</div>
+					<div class="modal-header p-0">
+						<input type="password" id="npwd1"
+							class="form-control input-sm input-transparent"
+							placeholder="新密码........"><i
+							style="color: red; padding: 10px;" id="msg2"></i>
+					</div>
+					<div class="modal-header p-0">
+						<input type="password" id="npwd2"
+							class="form-control input-sm input-transparent"
+							placeholder="新密码........"><i
+							style="color: red; padding: 10px;" id="msg3"></i>
+					</div>
+					<div class="modal-footer m-0">
+						<div style="margin-left: 42%">
+							<button class="btn" onclick="acceptupd()">保存</button>
+							<button class="btn" data-dismiss="modal" aria-hidden="true"
+								onclick="cancelupd()">取消</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Content -->
+		<section id="content" class="container">
+			
+			<!-- Breadcrumb -->
+	<ol class="breadcrumb hidden-xs">
+		<li><a href="#">Home</a></li>
+		<li><a href="#">Library</a></li>
+		<li class="active">Data</li>
+	</ol>
+
+	<h4 class="page-title">关键字屏蔽</h4>
+	<div style="padding-left: 8px; padding-top: 20px">
+		<table width=100%>
+			<tr>
+				<td width=150px><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键字：</h4></td>
+				<td><input type="text" class="form-control" name="keyWord"
+					id="keyWord" style="width: 300px" /></td>
+			</tr>
+			<tr>
+				<td height=30 width=20px><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;屏蔽状态：</h4></td>
+				<td><h4>
+						<label><input type="radio" name="inuse" id="radio1"
+							value="1" checked="checked" />屏蔽</label> <label><input
+							type="radio" name="inuse" id="radio2" value="0" />不屏蔽</label>
+					</h4></td>
+			</tr>
+			<tr>
+				<td height=30></td>
+				<td><button class="btn-alt" id="addbtn">
+						<h4>新 增</h4>
+					</button></td>
+			</tr>
+		</table>
+	</div>
+	<p></p>
+	<div style="padding-left: 8px; padding-top: 20px">
+		<div style="width: 150px;">
+			<h4>关键字查询：</h4>
+		</div>
+		<div style="width: 80px;float:left">
+			<h4>关键字：</h4>
+		</div>
+		<div class="col-lg-2" style="float:left">
+			<input type="text" class="form-control" name="rowKey" id="rowKey"
+				style="width: 200px">
+		</div>
+		<div class="col-lg-2" style="width: 150px;float:left;padding-left:50px">
+			<h4>屏蔽状态：</h4>
+		</div>
+		<div class="col-lg-2" style="width: 100px;float:left">
+			<h4>
+				<input type="radio" name="check" id="radio3" value="1" />屏蔽
+			</h4>
+		</div>
+		<div class="col-lg-2" style="width: 100px;float:left">
+			<h4>
+				<input type="radio" name="check" id="radio4" value="0" />不屏蔽
+			</h4>
+		</div>
+		<div class="col-lg-2" style="float:left">
+			<button class="btn btn-alt m-r-5" onclick="search()">搜 索</button>
+		</div>
+	</div>
+
+
+	<!-- Table Hover -->
+	<div class="block-area" id="tableHover">
+		<div class="table-responsive overflow">
+			<table class="table table-bordered table-hover tile" id="tableforb">
+				<thead>
+					<tr>
+						<th>操作用户</th>
+						<th>新增日期</th>
+						<th>关键字</th>
+						<th>屏蔽状态</th>
+						<th>删除</th>
+					</tr>
+				</thead>
+				<tbody id="reviewwordsList"><tr name="5"><td>yangxubo</td><td>2016-04-08:10:47:33:809</td><td>人生</td><td>不屏蔽</td><td><a class="deleteforbidden" value="人生" href="javascript:void(0)">删除</a></td></tr><tr name="5"><td>yangxubo</td><td>2016-04-08:10:59:27:738</td><td>分享</td><td>屏蔽</td><td><a class="deleteforbidden" value="分享" href="javascript:void(0)">删除</a></td></tr><tr name="5"><td>wanglong</td><td>2016-04-08:11:38:53:345</td><td>猪八戒</td><td>屏蔽</td><td><a class="deleteforbidden" value="猪八戒" href="javascript:void(0)">删除</a></td></tr></tbody>
+			</table>
+		</div>
+		<div style="margin: auto; width: 800px" align=center>
+			<h4>
+				<input type="button" class="btn btn-alt m-r-5" value="上一页"
+					onclick="frontPage()" id="front" disabled="disabled"> <input
+					type="button" class="btn btn-alt m-r-5" value="下一页"
+					onclick="nextPage()" id="next" disabled="disabled"> 当前第 <b
+					id="currentPage">1</b> 页，共<b id="total">1</b> 页，跳转到第&nbsp;<input
+					type="text" class="form-control m-b-10"
+					style="width: 30px; display: -webkit-inline-box; padding: 5px;"
+					id="goPage">&nbsp;页 <input type="button"
+					class="btn btn-alt m-r-5" size="2" value="Go!" onclick="go()">
+			</h4>
+		</div>
+	</div>
+			
+	</section>
+	
+		<br /> <br />
+	</section>
+
+	<!-- Javascript Libraries -->
+	<!-- jQuery -->
+	<script src="superadmin/js/jquery.min.js"></script>
+	<!-- jQuery Library -->
+
+	<!-- Bootstrap -->
+	<script src="superadmin/js/bootstrap.min.js"></script>
+
+	<!-- UX -->
+	<script src="superadmin/js/scroll.min.js"></script>
+	<!-- Custom Scrollbar -->
+
+	<!-- Other -->
+	<script src="superadmin/js/calendar.min.js"></script>
+	<!-- Calendar -->
+	<script src="superadmin/js/feeds.min.js"></script>
+	<!-- News Feeds -->
+
+
+	<!-- All JS functions -->
+	<script src="superadmin/js/functions.js"></script>
+	<script type="text/javascript" src="js/WdatePicker.js"></script>
+	<script type="text/javascript" src="js/jquery.showLoading.min.js"></script>
+	<script type="text/javascript" src="superadmin/js/unicorn.js"></script>
+	<script src="superadmin/js/icheck.js"></script>
+
+	<script type="text/javascript">
+		var basePath = "${pageContext.request.contextPath }";
+
+		function acceptupd() {
+			$("#msg1").text("");
+			$("#msg2").text("");
+			$("#msg3").text("");
+			var spwd = $("#spwd").val();
+			var npwd1 = $("#npwd1").val();
+			var npwd2 = $("#npwd2").val();
+			if (spwd.trim().length <= 0) {
+				$("#msg1").text(" *原密码不能为空");
+				return;
+			}
+			if (npwd1.trim().length < 6 || npwd1.trim().length > 30) {
+				$("#msg2").text(" *密码长度在6-30位");
+				return;
+			}
+			if (npwd2.trim().length < 6 || npwd2.trim().length > 30) {
+				$("#msg3").text(" *密码长度在6-30位");
+				return;
+			}
+			if (npwd1 != npwd2) {
+				$("#msg2").text(" *两次输入的密码不一致");
+				$("#msg3").text(" *两次输入的密码不一致");
+				return;
+			}
+			var flag = false;
+			if (!flag) {
+				flag = true;
+				$
+						.ajax({
+							type : "POST",
+							url : basePath + "/updatepwd.json",
+							data : {
+								'spwd' : spwd,
+								'npwd' : npwd2
+							},
+							dataType : "json",
+							contentType : "application/x-www-form-urlencoded; charset=utf-8",
+							success : function(data) {
+								if (data.flag == "error") {
+									window.location.href = basePath
+											+ "/index.jsp";
+								}
+								if (data.flag == false) {
+									flag = false;
+									alert(data.Msg)
+								} else if (data.flag == true) {
+									alert(data.Msg);
+									window.location.href = basePath
+											+ "/index.jsp";
+								} else {
+									flag = false;
+									alert(data.Msg);
+								}
+							},
+							error : function() {
+								alert("error!");
+								flag = false;
+							}
+						});
+			}
+
+		}
+
+		function cancelupd() {
+			$("#spwd").val("");
+			$("#npwd1").val("");
+			$("#npwd2").val("");
+			$("#msg1").text("");
+			$("#msg2").text("");
+			$("#msg3").text("");
+		}
+		
+		
+		/* function SetCwinHeight(obj)  
+		{  
+		    var cwin=obj;  
+		    if (document.getElementById)  
+		    {  
+		        if (cwin && !window.opera)  
+		        {  
+		            if (cwin.contentDocument && cwin.contentDocument.body.offsetHeight)  
+		                cwin.height = cwin.contentDocument.body.offsetHeight; //FF NS  
+		            else if(cwin.Document && cwin.Document.body.scrollHeight)  
+		                cwin.height = cwin.Document.body.scrollHeight;//IE  
+		        }  
+		        else  
+		        {  
+		            if(cwin.contentWindow.document && cwin.contentWindow.document.body.scrollHeight)  
+		            cwin.height = cwin.contentWindow.document.body.scrollHeight;//Opera  
+		        }  
+		    }  
+		}   */
+		
+		function ff() 
+		{ 
+		    document.getElementById("contentarea").height= document.body.offsetHeight - document.getElementById("header").scrollHeight*2; 
+		} 
+		
+	</script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			 $("#sidebar2 >ul> li").each(function(){
+				var href = $(this).find("a:eq(0)").attr("data-href");
+				$("#contentarea").attr("src",href);
+				return false;
+			});
+			
+			$("#sidebar2 >ul> li").on("click",function(){
+				
+				$("#sidebar2 >ul> li").removeClass();
+				$(this).addClass("active");
+				
+				$("#contentarea").attr("src",$(this).find("a:eq(0)").attr("data-href"));
+			});
+			
+		});
+	</script>
+</body>
+</html>

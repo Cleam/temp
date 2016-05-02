@@ -1,0 +1,460 @@
+var basePath = "/" + window.document.location.pathname.split("/")[1];
+var contentAll = "";
+var urlandtype = "";
+var map = new Array();
+$(document).ready(function() {
+	
+	//添加文字
+	$("#editArea").on("click",".addtext",function(){
+		var html ="";
+		html +="<span><span class='contents'><textarea class='content' style='resize:none;width:450px;height:100px'></textarea></span>";
+		html +="<br>";
+		html +="<input type='button' value='添加图片↓' class='addImg'>&nbsp;";
+		html +="<input type='button' value='添加文字↓' class='addtext'>&nbsp;";
+		html +="<input type='button' value='删除' class='delete'>";
+		html +="<br><br></span>"
+		$(this).parent().after(html);
+	});
+	
+	
+	//添加图片
+	$("#editArea").on("click",".addImg",function(){
+		var html ="";
+		html +="<span><span class='contents'>";
+		html +="图片URL：<input type='text' size='45' class='imgurl'><br><br>";
+		html +="图片类型：<input type='text' size='15' class='imgtype'>&nbsp;如jpg/png/gif等，不填留空";
+		html +="</span>";
+		html +="<br>";
+		html +="<input type='button' value='添加图片↓' class='addImg'>&nbsp;";
+		html +="<input type='button' value='添加文字↓' class='addtext'>&nbsp;";
+		html +="<input type='button' value='删除' class='delete'>";
+		html +="<br><br></span>"
+		$(this).parent().after(html);
+	});
+	
+	//添加缩略图片
+	$("#miniImg").on("click",".addminiImg",function(){
+		
+		var size  = $("#miniImg").find("span[class=miniimg]").length;
+		if(size > 2) {
+			alert("缩略图最多只能添加三个！");
+			return false;
+		}
+		var html ="";
+		html +="<span><span class='miniimg'>";
+		html +="图片URL：<input type='text' size='45' class='imgurl'><br><br>";
+		html +="图片类型：<input type='text' size='15' class='imgtype'>&nbsp;如jpg/png/gif等，不填留空";
+		html +="</span>";
+		html +="<br>";
+		html +="<input type='button' value='添加图片↓' class='addminiImg'>&nbsp;";
+		html +="<input type='button' value='删除' class='deletemini'>";
+		html +="<br><br></span>"
+		$(this).parent().after(html);
+	});
+	
+	//缩略图删除
+	$("#miniImg").on("click",".deletemini",function(){
+		$(this).parent().remove();
+	});
+	
+	
+	//正文部分删除
+	$("#editArea").on("click",".delete",function(){
+		$(this).parent().remove();
+	});
+	
+});
+
+var miniimg = false;
+var updateimg = false;
+var savehbase =false;
+var updatehtml =false;
+
+
+/**
+ * 生成页面并预览
+ * */
+function preview(){
+	
+	//初始化
+	$("#preview").removeAttr("style");
+	$("#tominiimg").removeAttr("style");
+	$("#updateimg").removeAttr("style");
+	$("#savehbase").removeAttr("style");
+	$("#updatehtml").removeAttr("style");
+	$("#onlineurl").remove();
+	$("#suoluetu").remove();
+	$("#zw").html("");
+	
+	var flag = true;
+	if(!check()){
+		flag = false;
+		return;
+	}
+	var content  = htmlBuild();
+	if(content==""){
+		 alert("请添加正文");
+		 flag = false;
+	}
+	else {
+		flag = true;
+	}
+	var maintype = $("#maintype").val();
+	var title = $("#title").val();
+	var contentfrom = $("#contentfrom").val();
+	var author = $("#author").val();
+	var contentdate = $("#contentdate").val();
+	var purl = $("#purl").val();
+	if(flag){
+		flag = false;
+		$.ajax({
+			type : "POST",
+			url : basePath + "/editpage01/createHtml.do",
+			data : {
+				"maintype" : maintype,
+				"title" : title,
+				"contentfrom" : contentfrom,
+				"author" : author,
+				"contentdate" : contentdate,
+				"purl" : purl,
+				"content" : contentAll,
+				"urlandtype" : urlandtype
+			},
+			dataType : "json",
+			contentType : "application/x-www-form-urlencoded; charset=utf-8",
+			success : function(data) {
+				
+				if(data.state=="error"){
+					window.parent.location.href=basePath+"/index.jsp";
+				}
+				flag = true;
+				if (data.state == false) {
+					alert(data.msg)
+				} else if (data.state == true) {
+					$("#zw").html("本地预览：<br><br>" +
+							"<iframe src='/html/"+data.data.filepath+"' width='100%' height='100%'></iframe>");
+					miniimg = true;
+					$("#preview").css({
+						"background" : "green",
+						"color" : "white"
+					});
+					
+				} else {
+					alert(data.msg);
+				}
+			},
+			error : function() {
+				alert("error!");
+				flag = true;
+			}
+		});
+	}
+}
+
+
+
+/**
+ * 生成缩略图
+ * */
+function miniImg(){
+	if(miniimg){
+	var tmp = miniimgBuild();
+	if(tmp=="") {
+		return false;
+	}
+	miniimg = false;
+	$("#suoluetu").remove();
+	$.ajax({
+		type : "POST",
+		url : basePath + "/editpage01/miniimg.do",
+		data : {
+			"urlandtype" : tmp
+		},
+		dataType : "json",
+		contentType : "application/x-www-form-urlencoded; charset=utf-8",
+		success : function(data) {
+			miniimg = true;
+			if(data.state=="error"){
+				window.parent.location.href=basePath+"/index.jsp";
+			}
+			if (data.state == false) {
+				alert(data.msg)
+			} else if (data.state == true) {
+				var pagewap = data.data.page;
+				var lunbo = pagewap.imglunbolist;
+				var mini = pagewap.imgminilist;
+				var minia = pagewap.imgminialist;
+				var special = data.data.imgspeciallist;
+				var html = "";
+				html +="<div id='suoluetu'><br><br>缩略图预览：<br><br>";
+				
+				//显示特殊图
+				html +="22:9图片：<br><br>";
+				for(var i = 0 ; i < special.length ; i ++ ) {
+					html += "<img src='/miniimage/"+special[i].imgname+"'><br><br>";
+				}
+				//显示大图
+				html +="2:1图片：<br><br>";
+				for(var i = 0 ; i < lunbo.length ; i ++ ) {
+					html += "<img src='/miniimage/"+lunbo[i].imgname+"'><br><br>";
+				}
+				//显示小图
+				html +="4:3图片：<br><br>";
+				for(var i = 0 ; i < mini.length ; i ++ ) {
+					html += "<img src='/miniimage/"+mini[i].imgname+"'><br><br>";
+				}
+				//显示16:9图
+				html +="16:9图片：<br><br>";
+				for(var i = 0 ; i < minia.length ; i ++ ) {
+					html += "<img src='/miniimage/"+minia[i].imgname+"'><br><br>";
+				}
+				
+				html +="</div>";
+				$("#miniImg").after(html);
+				
+				updateimg = true;
+				$("#tominiimg").css({
+					"background" : "green",
+					"color" : "white"
+				});
+				
+			} else {
+				alert(data.msg); 
+			}
+		},
+		error : function() {
+			miniimg = true;
+			alert("error!");
+		}
+	});
+	}
+}
+
+function updateImg(){
+	if(updateimg){
+		
+		updateimg = false;
+	$.ajax({
+		type : "POST",
+		url : basePath + "/editpage01/updateimg.do",
+		data : {
+		},
+		dataType : "json",
+		contentType : "application/x-www-form-urlencoded; charset=utf-8",
+		success : function(data) {
+			updateimg = false;
+			if(data.state=="error"){
+				window.parent.location.href=basePath+"/index.jsp";
+			}
+			
+			if (data.state == false) {
+				updateimg = true ;
+				alert(data.msg)
+			} else if (data.state == true) {
+				//解锁下一步操作  存hbase
+				savehbase = true ;
+				$("#updateimg").css({
+					"background" : "green",
+					"color" : "white"
+				});
+				
+			} else {
+				updateimg = true ;
+				alert(data.msg);
+			}
+		},
+		error : function() {
+			updateimg = true ;
+			alert("error!");
+		}
+	});
+	}
+}
+
+
+
+function updateHtml(){
+	
+	if(updatehtml) {
+		updatehtml = false ;
+	
+	$.ajax({
+		type : "POST",
+		url : basePath + "/editpage01/updatehtml.do",
+		data : {
+		},
+		dataType : "json",
+		contentType : "application/x-www-form-urlencoded; charset=utf-8",
+		success : function(data) {
+			updatehtml = false;
+			if(data.state=="error"){
+				window.parent.location.href=basePath+"/index.jsp";
+			}
+			
+			flag = true;
+			if (data.state == false) {
+				updatehtml = true;
+				alert(data.msg)
+			} else if (data.state == true) {
+				$("#updatehtml").css({
+					"background" : "green",
+					"color" : "white"
+				});
+				
+				$("#miniImg").before("<div id='onlineurl' style='word-break: break-all;word-wrap: break-word;'>url:"+data.data.url+"</div>")
+				
+			} else {
+				alert(data.msg);
+			}
+		},
+		error : function() {
+			alert("error!");
+			updatehtml = true;
+		}
+	});
+	}
+}
+
+
+function saveHbase(){
+	if(savehbase) {
+		savehbase = false ;
+	$.ajax({
+		type : "POST",
+		url : basePath + "/editpage01/puthbase.do",
+		data : {
+		},
+		dataType : "json",
+		contentType : "application/x-www-form-urlencoded; charset=utf-8",
+		success : function(data) {
+			savehbase = false;
+			if(data.state=="error"){
+				window.parent.location.href=basePath+"/index.jsp";
+			}
+			if (data.state == false) {
+				savehbase = true;
+				alert(data.msg)
+			} else if (data.state == true) {
+				//解锁下一步操作  上传html
+				updatehtml = true ;
+				$("#savehbase").css({
+					"background" : "green",
+					"color" : "white"
+				});
+			} else {
+				alert(data.msg);
+			}
+		},
+		error : function() {
+			alert("error!");
+			savehbase = true;
+		}
+	});
+	}
+}
+
+//页面元素重组
+function htmlBuild(){
+	map = new Array();
+	contentAll = "";
+	var imgurl = "";
+	var imgtype = "";
+	var idxtmp = "";
+	var idx = 1 ;
+	var imgname = "";
+	urlandtype = "";
+	$(".contents").each(function(i, domEle){
+		if($(this).find("input[class=imgurl]").length !=0){
+			imgurl = $(this).find("input[class=imgurl]").eq(0).val();//图片链接
+			imgtype =$(this).find("input[class=imgtype]").eq(0).val();//图片类型
+			urlandtype+="!@-!@"+idx+"!@#!@"+imgurl+"!@#!@"+(imgtype==null||imgtype==""?"notype":imgtype);
+			var imgidx = ""+idx;
+			idxtmp = "";
+			for(var j=1;j<=4-imgidx.length;j++)
+			{
+				idxtmp+="0";
+			}
+			imgidx =  idxtmp + imgidx;
+			map[i] = "$#imgidx="+imgidx+"#$";
+			idx ++;
+		}
+		else {
+			var tmpstr = $(this).find("textarea[class=content]").eq(0).val();
+			var tmpstr2 = tmpstr.split(/\n/);
+			tmpstr = "";
+			for(var y = 0 ; y < tmpstr2.length ; y ++ ) {
+				tmpstr +="!@#!@"+tmpstr2[y];
+			}
+			tmpstr = tmpstr.replace("!@#!@","");
+			map[i] = tmpstr;
+		}
+    });
+	//遍历map
+	for(var prop in map){
+	    if(map.hasOwnProperty(prop)){
+	    	contentAll+="!@#!@"+map[prop];
+	    }
+	}
+//	content = content.replace("!@#!@","");
+//	imgurl = imgurl.replace(";","");
+//	imgtype = imgtype.replace(";","");
+	
+	return contentAll;
+}
+
+
+//取缩略图
+function miniimgBuild(){
+	var imgurl = "";
+	var imgtype = "";
+	var idxtmp = "";
+	var idx = 1 ;
+	var imgname = "";
+	urlandtype = "";
+	$(".miniimg").each(function(i, domEle){
+		imgurl = $(this).find("input[class=imgurl]").eq(0).val();//图片链接
+		if(imgurl == "" || imgurl == undefined || imgurl == null ) {
+			urlandtype = "";
+			alert("缩略图URL不能为空");
+			return false;
+		}
+		imgtype =$(this).find("input[class=imgtype]").eq(0).val();//图片类型
+		urlandtype+="!@-!@"+idx+"!@#!@"+imgurl+"!@#!@"+(imgtype==null||imgtype==""?"notype":imgtype);
+		var imgidx = ""+idx;
+		idxtmp = "";
+		for(var j=1;j<=4-imgidx.length;j++)
+		{
+			idxtmp+="0";
+		}
+		imgidx =  idxtmp + imgidx;
+		map[i] = "$#imgidx="+imgidx+"#$";
+		idx ++;
+    });
+	return urlandtype;
+}
+
+
+/**
+ * 标题日期等检查
+ * */
+function check(){
+	var maintype = $("#maintype").val();
+	var title = $("#title").val();
+	var contentfrom = $("#contentfrom").val();
+	if(title==null||title==""){
+		$("#title").focus();
+		flag = false;
+	}
+	else if(contentfrom==null||contentfrom==""){
+		$("#contentfrom").focus();
+		flag = false;
+	}
+	else if(maintype==null||maintype==""){
+		$("#maintype").focus();
+		flag = false;
+	}
+	else {
+		flag = true;
+	}
+	return flag;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)http://down.dftoutiao.com/newsapp/index.html -->
+<html lang="zh-cn">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>东方头条APP上线啦</title>
+    <style type="text/css">
+        body, nav, dl, dt, dd, p, h1, h2, h3, h4, ul, ol, li, input, button, textarea, footer {margin: 0; padding: 0 } body {font: 0.12rem 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'sans-self'; } form {display: inline } ul, ol {list-style: none } a {text-decoration: none; color: #1a1a1a } a:hover, a:active, a:focus {color: #1c5aa2; text-decoration: none; } a:active {color: #aaa; } img {vertical-align: middle; border: 0; -ms-interpolation-mode: bicubic; } a {-webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+        .share-wrap {display: block; width: 100%; background: #A22D2F url("share.jpg") center no-repeat; background-size: auto 100%; }
+        .share-wrap_img {display: none; opacity: 0; -moz-opacity: 0; filter: alpha(opacity=0); width: 512px; height: 512px; z-index: -1; position: absolute; left: -20000px; top: 0; }
+        .share-warpbgimg {display: none; } 
+    </style>
+    <script type="text/javascript" src="./东方头条APP上线啦_files/jquery.js"></script>
+</head>
+
+<body>
+    <div class="share-wrap" style="width: 736px; height: 666px;">
+        <img class="share-wrap_img" src="./东方头条APP上线啦_files/logo_96.png">
+        <div class="share-warpbgimg"><img src="./东方头条APP上线啦_files/share.jpg"></div>
+    </div>
+    <script type="text/javascript">
+    $(".share-warpbgimg").append('<img src="share.jpg">');
+
+    function share_warbgimg() {
+        var u = navigator.userAgent,
+            app = navigator.appVersion;
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) == "micromessenger") {
+            if (!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {
+                // $(".share-wrap").show();
+                window.location.href = "http://a.app.qq.com/o/simple.jsp?pkgname=com.songheng.eastnews";
+            } else {
+                window.location.href = "http://a.app.qq.com/o/simple.jsp?pkgname=com.songheng.eastnews";
+            }
+        } else {
+            if (!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {
+                window.location.href = "https://itunes.apple.com/cn/app/dong-fang-tou-tiao-xin-wen/id1030220577?l=en&mt=8";
+            } else {
+                window.location.href = "http://down.dftoutiao.com/android/gf/eastnews.apk";
+            }
+        }
+        $(".share-wrap").width($(window).width());
+        $(".share-wrap").height($(window).height());
+    }
+    if ($(".share-warpbgimg img").length > 0) {
+        share_warbgimg();
+    } else {
+        setTimeout(function() {
+            share_warbgimg();
+        }, 3000);
+    }
+    </script>
+</body>
+
+</html>

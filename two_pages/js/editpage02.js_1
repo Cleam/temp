@@ -1,0 +1,362 @@
+var basePath = "/" + window.document.location.pathname.split("/")[1];
+var imgurl = "";
+var map = new Array();
+$(document)
+		.ready(
+				function() {
+					
+					
+					$("#miniImg").on("click",".imgsubmit",function(){
+						var a = $(this).parent().find("input[name=upfile2]");
+						var b = $(this).parent().find("input[name=upfile2]").val();
+						if(b=="" || b==undefined){
+							alert("请选择上传图片后上传");
+							return;
+						}
+						var formData = new FormData($(this).parent(".singleimageform")[0]);  
+						$.ajax({
+				            cache: false,
+				            type: "POST",
+				            url:basePath + "/editpage01/upload.do",
+				            data:formData,// 你的formid
+				            async: false,
+				            processData: false,  // 告诉jQuery不要去处理发送的数据
+				            contentType: false,
+				            error: function(request) {
+				                alert("Connection error");
+				            },
+				            success: function(data) {
+				              a.val("");
+				               var data = data.data;
+				               if(data!=null && data!="null" && data!=""){
+				            	  a.parent().parent().find("input[class=imgurl]").val(data);
+				               }
+				            }
+				        });
+					});
+					
+
+					//添加缩略图片
+					$("#miniImg").on("click",".addminiImg",function(){
+						
+						var size  = $("#miniImg").find("span[class=miniimg]").length;
+						if(size > 2) {
+							alert("缩略图最多只能添加三个！");
+							return false;
+						}
+						var html ="";
+						html +="<span><span class='miniimg'>";
+						html +="<form class=\"singleimageform\" method=\"post\" enctype=\"multipart/form-data\">";
+						html +=	"<input type=\"file\" name=\"upfile2\"/>";
+						html +=	"<input type=\"button\" value=\"确定上传\" class=\"imgsubmit\"/>";
+						html +=	"</form><br>";
+						html +="图片URL：<input type='text' size='45' class='imgurl'><br><br>";
+						html +="图片类型：<input type='text' size='15' class='imgtype'>&nbsp;如jpg/png/gif等，不填留空";
+						html +="</span>";
+						html +="<br>";
+						html +="<input type='button' value='添加图片↓' class='addminiImg'>&nbsp;";
+						html +="<input type='button' value='删除' class='deletemini'>";
+						html +="<br><br></span>"
+						$(this).parent().after(html);
+					});
+			//缩略图删除
+			$("#miniImg").on("click",".deletemini",function(){
+				$(this).parent().remove();
+			});
+			
+			var bool = true;
+			var steptwo = false;
+			//第二步操作
+			$("#createandsave").on("click",function(){
+				if(!steptwo){
+					alert("请先完成第一步操作");
+					return;
+				}
+				$(".body").showLoading();  
+				$.ajax({
+					type : "POST",
+					url : basePath + "/editpage02/createandsave.do",
+					data : {
+					},
+					dataType : "json",
+					contentType : "application/x-www-form-urlencoded; charset=utf-8",
+					success : function(data) {
+						$(".body").hideLoading();  
+						if(data.state=="error"){
+							window.parent.location.href=basePath+"/index.jsp";
+						}
+						if (data.state == false) {
+							alert(data.msg)
+						} else if (data.state == true) {
+							alert("SUCCESS");
+							$("input[type=text]").val("");
+							UE.getEditor('editor').setContent("");
+							$("#zw").html("页面地址："+data.data.url);
+						} else {
+							alert(data.msg);
+						}
+					},
+					error : function() {
+						$(".body").hideLoading();  
+						alert("error!");
+					}
+				});
+			});
+			$("#phoneclose").on('click', function() {
+				$("#previewbox").hide()
+			});
+			
+			//第一步操作
+			$("#phone").on("click",function(){
+				steptwo = false;
+				if(!check()){
+					return;
+				}
+				$("#previewhtml").html("");
+				var content =UE.getEditor('editor').getContent();;
+				if(content.length==0){
+					alert("内容不能是空的")
+					return;
+				}
+				var tmp = miniimgBuild();
+				if(tmp=="") {
+					return;
+				}
+				var title = $("#title").val();
+				var contentfrom = $("#contentfrom").val();
+				var date = $("#date").val();
+				if(bool){
+					$(".body").showLoading();  
+					bool = false;
+					$.ajax({
+						type : "POST",
+						url : basePath + "/editpage02/previewpage.do",
+						data : {
+							"title" : title,
+							"contentfrom" : contentfrom,
+							"content" : content,
+							"urlandtype" : urlandtype,
+							"date": date
+						},
+						dataType : "json",
+						contentType : "application/x-www-form-urlencoded; charset=utf-8",
+						success : function(data) {
+							$(".body").hideLoading();  
+							if(data.state=="error"){
+								window.parent.location.href=basePath+"/index.jsp";
+							}
+							bool = true;
+							if (data.state == false) {
+								alert(data.msg)
+							} else if (data.state == true) {
+								steptwo = true;
+								$("#previewhtml").html(
+										"<iframe src='/html/"+data.data.filepath+"' width='100%' height='100%'></iframe>");
+								if ($("#previewbox").css("display") == "block") {
+									$("#previewbox").hide();
+								} else {
+									$("#previewbox").show();
+								}
+							} else {
+								alert(data.msg);
+							}
+						},
+						error : function() {
+							$(".body").hideLoading();  
+							alert("error!");
+							bool = true;
+						}
+					});
+				}
+			});
+			
+	});
+
+// 回车查询
+function on_return() {
+	var tmp = $("#urlid").is(":focus");
+	if (tmp) {
+		if (event.keyCode == 13) {
+			search()
+		}
+	}
+}
+
+
+/**
+ * 查询 param urlid 返回 基础rowkeyList，pagewap
+ */
+function search() {
+
+	// 初始化
+	$("#preview").removeAttr("style");
+	$("#updatehtml").removeAttr("style");
+	$("#zw").html("");
+
+	var flag = true;
+	var urlId = $("#urlid").val();
+	if (urlId == "") {
+		alert("请输入urlid");
+		flag = false;
+	} else {
+		flag = true;
+	}
+	if (flag) {
+		flag = false;
+		$
+				.ajax({
+					type : "POST",
+					url : basePath + "/editpage02/search.do",
+					data : {
+						"urlid" : urlId
+					},
+					dataType : "json",
+					contentType : "application/x-www-form-urlencoded; charset=utf-8",
+					success : function(data) {
+
+						if (data.state == "error") {
+							window.location.href = basePath + "/index.jsp";
+						}
+
+						flag = true;
+						if (data.state == false) {
+							alert(data.msg)
+						} else if (data.state == true) {
+
+							createhtml = true;
+
+							var pagewap = data.data[0];
+							var html = "";
+							html += "标题：<input type='text' size='50' value='"
+									+ pagewap.contenttitle + "' id='title'><br><br>";
+							html += "来源：<input type='text' size='25' value='"
+									+ pagewap.source
+									+ "' id='contentfrom'><br><br>";
+							html +="日期：<input class='Wdate' type='text' size='25'  id='date' onclick=\"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',autoPickDate:true})\" readonly='readonly'><br><br>";
+							$("#rowkeyList").html(html);
+							$("#maintype").val(pagewap.urlmaintype);
+							html="";
+							var content = pagewap.content;
+							for(var x=0 ; x<pagewap.imgs.length;x ++ ){
+								 var idx =parseInt(pagewap.imgs[x].idx);
+								 var imgidx = ""+idx;
+                                 var idxtmp = "";
+                                 for(var y=1;y<=4-imgidx.length;y++)
+                                 {
+                                         idxtmp+="0";
+                                 }
+                                 imgidx =  idxtmp + imgidx;
+                                 imgidx = "$#imgidx="+imgidx+"#$";
+                                 content = content.replace(imgidx,"<img src='"+pagewap.imgs[x].src+ "' width='100%'>");
+							}
+							var contenttext = content.split("!@#!@");
+							if (contenttext.length > 0) {
+								var j = 0;
+								for (var i = 0; i < contenttext.length; i++) {
+									if (contenttext[i].length != 0) {
+										if(contenttext[i].indexOf("$#imgidx=")!=-1){
+											continue;
+										}
+										html =html+ contenttext[i]+"<br><br>";
+									}
+								}
+							}
+							console.log(html);
+							UE.getEditor('editor').execCommand('insertHtml', html);
+							
+						} else {
+							alert(data.msg);
+						}
+					},
+					error : function() {
+						alert("error!");
+						flag = true;
+					}
+				});
+	}
+}
+
+/**
+ * 标题日期等检查
+ * */
+function check(){
+	var title = $("#title").val();
+	var contentfrom = $("#contentfrom").val();
+	if(title==null||title==""){
+		$("#title").focus();
+		flag = false;
+	}
+	else if(contentfrom==null||contentfrom==""){
+		$("#contentfrom").focus();
+		flag = false;
+	}
+	else {
+		flag = true;
+	}
+	return flag;
+}
+
+
+
+//取缩略图
+function miniimgBuild(){
+	var imgurl = "";
+	var imgtype = "";
+	var idxtmp = "";
+	var idx = 1 ;
+	var imgname = "";
+	urlandtype = "";
+	$(".miniimg").each(function(i, domEle){
+		imgurl = $(this).find("input[class=imgurl]").eq(0).val();//图片链接
+		if(imgurl == "" || imgurl == undefined || imgurl == null ) {
+			urlandtype = "";
+			alert("缩略图URL不能为空");
+			return false;
+		}
+		else {
+			imgtype =$(this).find("input[class=imgtype]").eq(0).val();//图片类型
+			urlandtype+="!@-!@"+idx+"!@#!@"+imgurl+"!@#!@"+(imgtype==null||imgtype==""?"notype":imgtype);
+			var imgidx = ""+idx;
+			idxtmp = "";
+			for(var j=1;j<=4-imgidx.length;j++)
+			{
+				idxtmp+="0";
+			}
+			imgidx =  idxtmp + imgidx;
+			map[i] = "$#imgidx="+imgidx+"#$";
+			idx ++;
+		}
+    });
+	return urlandtype;
+}
+
+
+function fssubmit(){
+	if($("input[name=upfile]").val()=="" || $("input[name=upfile]").val()==undefined){
+		alert("请选择上传图片后上传");
+		return;
+	}
+	var formData = new FormData($("#singleimage")[0]);  
+	$.ajax({
+        cache: false,
+        type: "POST",
+        url:basePath + "/editpage01/upload.do",
+        data:formData,// 你的formid
+        async: false,
+        processData: false,  // 告诉jQuery不要去处理发送的数据
+        contentType: false,
+        error: function(request) {
+            alert("Connection error");
+        },
+        success: function(data) {
+           $("input[name=upfile]").val(''); 
+           var data = data.data;
+           if(data!=null && data!="null" && data!=""){
+        	   var html='<li> <div class="itembox">';
+               html += '<p><img style="height: auto !important;width:100%" src="/image/'+data+'" isupload="1"></p>';
+               html += 	'</div></li>';
+               $("#uploadimgview").append(html);
+           }
+        }
+    });
+}

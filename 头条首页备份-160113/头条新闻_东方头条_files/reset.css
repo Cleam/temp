@@ -1,0 +1,158 @@
+@charset "utf-8";
+/**
+ * 基本样式
+ * @author lizhigao(lizhigao@021.com)
+ */
+/*====================== reset =======================*/
+/* 让非ie浏览器默认也显示垂直滚动条，防止因滚动条引起的闪烁 */
+html {overflow-y: scroll}
+html,body {background-image: url(about:blank); background-attachment: fixed;}
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, fieldset, lengend, button, input, textarea, th, td {margin: 0; padding: 0; outline: 0;} /* 清除内外边距 */
+:focus{outline: 0 none; font-weight: normal;}
+body{min-width: 1002px; min-height: 100%; color: #333;}
+body, button, input, select, textarea {font: 14px/1.5 \5FAE\8F6F\96C5\9ED1,"Microsoft YaHei",arial,sans-serif;} /* 设置默认字体 */
+/*body, button, input, select, textarea {font: 14px/100% \5b8b\4f53,"宋体","Hiragino Sans GB","Hiragino Sans GB W3","Microsoft Yahei",arial,sans-serif;} !* 设置默认字体 *!*/
+h1,h2,h3,h4,h5,h6 {font-size: 1em;}
+iframe,img {border: 0 none;}
+em,i,ins {font-style: normal; text-decoration: none}
+address, cite, dfn, em, var { font-style: normal; } /* 将斜体扶正 */
+code, kbd, pre, samp, tt { font-family: "Courier New", Courier, monospace; } /* 统一等宽字体 */
+small { font-size: 12px; } /* 小于 12px 的中文很难阅读，让 small 正常化 */
+ul, li, ol { list-style: none; } /* 重置列表元素 */
+/* 重置表格元素 */
+table {border-collapse: collapse; border-spacing: 0;}
+/* 重置文本格式元素 */
+a {text-decoration: none; outline: none; color: #333; /* -webkit-transition:all 0.15s linear;-moz-transition:all 0.15s linear;-ms-transition:all 0.15s linear;-o-transition:all 0.15s linear; */ cursor: pointer;}
+a:hover {color: #ee4b4b;/*  text-decoration: underline; */}
+a:focus{font-weight: inherit;}
+abbr[title], acronym[title] { border-bottom: 1px dotted; cursor: help;} /* 注：1.ie6 不支持 abbr; 2.这里用了属性选择符，ie6 下无效果 */
+q:before, q:after { content: ''; }
+/* 重置表单元素 */
+input {outline: none}
+input::-ms-clear {display: none}
+legend { color: #333; } /* for ie6 */
+fieldset, img { border: none; } /* img 搭车：让链接里的 img 无边框 */
+/* 注：optgroup 无法扶正 */
+button, input, select, textarea {font-family:inherit; font-size:inherit; font-style:inherit; font-weight:inherit} /* 使得表单元素在 ie 下能继承字体大小 */
+textarea {overflow:auto; resize:vertical;}
+label {cursor:pointer;}
+/* 重置 hr */
+hr {border: none; height: 1px; background-color: #eee;}
+/* 解决IE6 a标签外框虚线问题 */
+*html a {outline: none;}
+/**html a:active {star:expression(this.onFocus=this.blur());}*/
+button{cursor: pointer;}
+.clear-fix:after,.clear-fix:before,.cf:after,.cf:before{content:''; display:table }
+.clear-fix:after,.cf:after{clear:both }
+
+/*====================== font =======================*/
+.f12{font-size: 12px !important;}
+.f14{font-size: 14px !important;}
+.f16{font-size: 16px !important;}
+.f18{font-size: 18px !important;}
+.f20{font-size: 20px !important;}
+.f22{font-size: 22px !important;}
+.f24{font-size: 24px !important;}
+.f26{font-size: 26px !important;}
+.fb{font-weight:bold}
+.fn{font-weight:normal;}
+.t2{text-indent:2em;}
+.lh150{line-height:150%;}
+.lh180{line-height:180%;}
+.lh200{line-height:200%;}
+.unl{text-decoration:underline;}
+.no_unl{text-decoration:none;}
+
+/*====================== mouse =======================*/
+.cp{cursor: pointer;}
+.cd{cursor: default;}
+.cna{cursor: not-allowed;}
+
+/*====================== position =======================*/
+.tl{text-align:left;}
+.tc{text-align:center;}
+.tr{text-align:right;}
+.bc{margin-left:auto; margin-right: auto;}/* blockCenter 配合宽度使用 可以使块级元素居中 */
+.cb{clear:both;}
+.cl{clear:left;}
+.cr{clear:right;}
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+*html .clearfix{height:1%; zoom: 1;}
+.clearfix{display:block; zoom: 1;}
+.fl{float:left; display:inline;}
+.fr{float:right; display:inline;}
+.vt{vertical-align:top;}
+.vm{vertical-align:middle;}
+.vb{vertical-align:bottom;}
+.pr{position:relative;}
+.pa{position:absolute;}
+.abs-right{position:absolute;right:0}
+.zoom{zoom:1;}
+.hidden{visibility:hidden;}
+.none{display:none;}
+.ib{display: inline-block;}
+.inline{display: inline;}
+.block{display: block;}
+
+/*====================== layout =======================*/
+
+/*====================== box-modal =======================*/
+/* margin */
+.ml5{margin-left: 5px !important;}
+.mr5{margin-right: 5px !important;}
+.mt5{margin-top: 5px !important;}
+.mb5{margin-bottom: 5px !important;}
+.ml10{margin-left: 10px !important;}
+.mr10{margin-right: 10px !important;}
+.mt10{margin-top: 10px !important;}
+.mb10{margin-bottom: 10px !important;}
+.ml15{margin-left: 15px !important;}
+.mr15{margin-right: 15px !important;}
+.mt15{margin-top: 15px !important;}
+.mb15{margin-bottom: 15px !important;}
+.ml20{margin-left: 20px !important;}
+.mr20{margin-right: 20px !important;}
+.mt20{margin-top: 20px !important;}
+.mb20{margin-bottom: 20px !important;}
+.ml25{margin-left: 25px !important;}
+.mr25{margin-right: 25px !important;}
+.mt25{margin-top: 25px !important;}
+.mb25{margin-bottom: 25px !important;}
+.ml30{margin-left: 30px !important;}
+.mr30{margin-right: 30px !important;}
+.mt30{margin-top: 30px !important;}
+.mb30{margin-bottom: 30px !important;}
+.ml40{margin-left: 40px !important;}
+.mr40{margin-right: 40px !important;}
+.mt40{margin-top: 40px !important;}
+.mb40{margin-bottom: 40px !important;}
+/* padding */
+.pl5{padding-left: 5px !important;}
+.pr5{padding-right: 5px !important;}
+.pt5{padding-top: 5px !important;}
+.pb5{padding-bottom: 5px !important;}
+.pl10{padding-left: 10px !important;}
+.pr10{padding-right: 10px !important;}
+.pt10{padding-top: 10px !important;}
+.pb10{padding-bottom: 10px !important;}
+.pl15{padding-left: 15px !important;}
+.pr15{padding-right: 15px !important;}
+.pt15{padding-top: 15px !important;}
+.pb15{padding-bottom: 15px !important;}
+.pl20{padding-left: 20px !important;}
+.pr20{padding-right: 20px !important;}
+.pt20{padding-top: 20px !important;}
+.pb20{padding-bottom: 20px !important;}
+.pl25{padding-left: 25px !important;}
+.pr25{padding-right: 25px !important;}
+.pt25{padding-top: 25px !important;}
+.pb25{padding-bottom: 25px !important;}
+.pl30{padding-left: 30px !important;}
+.pr30{padding-right: 30px !important;}
+.pt30{padding-top: 30px !important;}
+.pb30{padding-bottom: 30px !important;}
+.pl40{padding-left: 40px !important;}
+.pr40{padding-right: 40px !important;}
+.pt40{padding-top: 40px !important;}
+.pb40{padding-bottom: 40px !important;}
+

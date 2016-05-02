@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<!--[if IE 9 ]><html class="ie9"><![endif]-->
+<head>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<meta name="format-detection" content="telephone=no">
+<meta charset="UTF-8">
+
+<meta name="description" content="Violate Responsive Admin Template">
+<meta name="keywords" content="Super Admin, Admin, Template, Bootstrap">
+
+<title>CMS后台管理系统</title>
+
+<!-- CSS -->
+<link href="superadmin/css/bootstrap.min.css" rel="stylesheet">
+<link href="superadmin/css/animate.min.css" rel="stylesheet">
+<link href="superadmin/css/animate.css" rel="stylesheet">
+<link href="superadmin/css/font-awesome.min.css" rel="stylesheet">
+<link href="superadmin/css/form.css" rel="stylesheet">
+<link href="superadmin/css/calendar.css" rel="stylesheet">
+<link href="superadmin/css/media-player.css" rel="stylesheet">
+<link href="superadmin/css/style.css" rel="stylesheet">
+<link href="superadmin/css/icons.css" rel="stylesheet">
+<link href="superadmin/css/generics.css" rel="stylesheet">
+<link href="js/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+<link href="superadmin/css/page.css" rel="stylesheet">
+
+<style type="text/css">
+/*body{background-color: rgba(45,45,45,0.8);}
+.labelcl {
+	width: 18px;
+	height: 18px;
+}
+
+.checkbox{width: 18px;height: 18px;float: none;border:1px solid #DBDBDB;background: #F5F7F9;cursor: pointer;position: absolute;top: 0;left: 0;margin-top: 0px;}
+.checkbox-con .cur{border:none;background:url('images/checkimages/1.png') no-repeat;}
+.checkbox-con span{position: relative;padding-left: 20px;margin-right: 10px;}
+.checkbox-con .ipt-hide{position: absolute;width: 0;height: 0;border: none;}*/
+</style>
+</head>
+<body>
+
+
+
+	<!-- Breadcrumb -->
+	<ol class="breadcrumb hidden-xs">
+		<li><a href="#">Home</a></li>
+		<li><a href="#">Library</a></li>
+		<li class="active">Data</li>
+	</ol>
+
+	<h4 class="page-title">URL审核</h4>
+	<div class="container-wrap">
+		<div class="row">
+			<div class="col-md-3 col-sm-4 col-xs-10">
+				<label class="sr-only" for="kw2">日期: </label>
+		    	<input type="text" class="Wdate form-control m-b-10"
+					style="cursor: pointer" readonly="readonly" id="startdate"
+					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',autoPickDate:true,maxDate:'#F{$dp.$D(\'enddate\')}'})"
+					value="">
+			</div>
+			<div class="col-md-3 col-sm-4 col-xs-10">
+				<input type="text" class="Wdate form-control m-b-10"
+					style="cursor: pointer" readonly="readonly" id="enddate"
+					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',autoPickDate:true,minDate:'#F{$dp.$D(\'startdate\')}'})">
+			</div>
+			<div class="col-md-3 col-sm-4 col-xs-6">
+				<button type="submit" class="btn btn-alt" onclick="search()">搜索</button>
+			</div>
+		</div>
+
+		<div class="pages-wrap">
+			<div class="row">
+				<div class="col-md-3 col-sm-3 section active">
+					<p class="line1"><span>标题：</span><a href="http://toutiao.eastday.com" target="_blank">国产版MacBook Air下月开售，居然不是小米笔记本！</a></p>
+					<p class="line2"><span>来源URL：</span><a href="http://toutiao.eastday.com" target="_blank">http://toutiao.eastday.com</a></p>
+				</div>
+				<div class="col-md-3 col-sm-3 section">
+					<p class="line1"><span>标题：</span><a href="http://toutiao.eastday.com" target="_blank">国产版MacBook Air下月开售，居然不是小米笔记本！</a></p>
+					<p class="line2"><span>来源URL：</span><a href="http://toutiao.eastday.com" target="_blank">http://toutiao.eastday.com</a></p>
+				</div>
+				<div class="col-md-3 col-sm-3 section active">
+					<p class="line1"><span>标题：</span><a href="http://toutiao.eastday.com" target="_blank">国产版MacBook Air下月开售，居然不是小米笔记本！</a></p>
+					<p class="line2"><span>来源URL：</span><a href="http://toutiao.eastday.com" target="_blank">http://toutiao.eastday.com</a></p>
+				</div>
+				<div class="col-md-3 col-sm-3 section">
+					<p class="line1"><span>标题：</span><a href="http://toutiao.eastday.com" target="_blank">国产版MacBook Air下月开售，居然不是小米笔记本！</a></p>
+					<p class="line2"><span>来源URL：</span><a href="http://toutiao.eastday.com" target="_blank">http://toutiao.eastday.com</a></p>
+				</div>
+			</div>
+
+			<!-- options -->
+			<div class="options row">
+				<div class="col-md-3 col-sm-3 col-xs-4 btn-wrap"><button class="btn btn-alt">提交审核</button></div>
+				<div class="col-md-3 col-sm-3 col-xs-4 btn-wrap"><button class="btn btn-alt">直接审核</button></div>
+				<div class="col-md-3 col-sm-3 col-xs-4 btn-wrap"><button class="btn btn-alt">进入下级审核</button></div>
+			</div>
+			<!-- 分页 -->
+			<div class="pagination">
+				<a class="prev-page disable">上一页</a><a class="next-page">下一页</a>
+			</div>
+			
+		</div>	<!-- /pages-wrap -->
+	</div>
+
+	<!-- Javascript Libraries -->
+	<!-- jQuery -->
+	<script src="superadmin/js/jquery.min.js"></script>
+	<!-- jQuery Library -->
+
+	<!-- Bootstrap -->
+	<script src="superadmin/js/bootstrap.min.js"></script>
+
+	<!-- UX -->
+	<script src="superadmin/js/scroll.min.js"></script>
+	<!-- Custom Scrollbar -->
+
+	<!-- Other -->
+	<script src="superadmin/js/calendar.min.js"></script>
+	<!-- Calendar -->
+	<script src="superadmin/js/feeds.min.js"></script>
+	<!-- News Feeds -->
+
+
+	<!-- All JS functions -->
+	<script src="superadmin/js/functions.js"></script>
+	<script type="text/javascript" src="js/WdatePicker.js"></script>
+	<script src="superadmin/js/select.min.js"></script>
+	<script src="superadmin/js/icheck.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var today = new Date();
+			var t = today.getTime() - 1000 * 60 * 60 * 24;
+			var enddate = new Date(today.getTime() + 1000 * 60 * 60 * 1)
+			var startdate = new Date(t);
+			$("#enddate").val(formatDate(enddate, "yyyy-MM-dd hh:mm:ss"));
+			$("#startdate").val(formatDate(startdate, "yyyy-MM-dd hh:mm:ss"))
+
+		});
+
+		//格式化CST日期的字串
+		function formatCSTDate(strDate, format) {
+			return formatDate(new Date(strDate), format);
+		}
+
+		//格式化日期,
+		function formatDate(date, format) {
+			var paddNum = function(num) {
+				num += "";
+				return num.replace(/^(\d)$/, "0$1");
+
+			}
+			//指定格式字符
+			var cfg = {
+				yyyy : date.getFullYear() //年 : 4位
+				,
+				yy : date.getFullYear().toString().substring(2)//年 : 2位
+				,
+				M : date.getMonth() + 1 //月 : 如果1位的时候不补0
+				,
+				MM : paddNum(date.getMonth() + 1) //月 : 如果1位的时候补0
+				,
+				d : date.getDate() //日 : 如果1位的时候不补0
+				,
+				dd : paddNum(date.getDate())//日 : 如果1位的时候补0
+				,
+				hh : paddNum(date.getHours()) //时
+				,
+				mm : paddNum(date.getMinutes()) //分
+				,
+				ss : paddNum(date.getSeconds())
+			//秒
+			}
+			format || (format = "yyyy-MM-dd hh:mm:ss");
+			return format.replace(/([a-z])(\1)*/ig, function(m) {
+				return cfg[m];
+			});
+		}
+
+		var page = 1;
+		var pagesize = 2;
+		var basePath = "${pageContext.request.contextPath }";
+		var flag = true;
+		//回车查询
+		function on_return() {
+			if (event.keyCode == 13) {
+				search()
+			}
+		}
+
+		//查询
+		function reviewsearch() {
+			var startdate = $("#startdate").val();
+			var enddate = $("#enddate").val();
+			if (startdate == "" || startdate == undefined) {
+				alert("请选择开始日期");
+				flag = false;
+			} else if (enddate == "" || enddate == undefined) {
+				alert("请选择结束日期");
+				flag = false;
+			} else {
+				flag = true;
+			}
+			if (flag) {
+				$("#reviewList").html("");
+				flag = false;
+				$
+						.ajax({
+							type : "POST",
+							url : basePath + "/reviewpages/reviewlist.do",
+							data : {
+								"startDate" : startdate,
+								"endDate" : enddate,
+								"pageSize" : pagesize
+							},
+							dataType : "json",
+							contentType : "application/x-www-form-urlencoded; charset=utf-8",
+							success : function(data) {
+								flag = true;
+
+								if (data.state == "error") {
+									window.parent.location.href = basePath
+											+ "/index.jsp";
+								}
+
+								if (data.state == false) {
+									alert(data.msg)
+								} else if (data.state == true) {
+									$("#currentPage").html(page);
+									var reviewbeans = data.data;
+									var html = "";
+									var isnone = data.none;
+									$("#next").removeAttr("disabled");
+									if (isnone == "no") {
+										$("#next").attr("disabled", "disabled");
+									}
+									for ( var i in reviewbeans) {
+										html = "";//初始化
+										html += "<tr id='"+reviewbeans[i].rowkey+"'>";
+										html += "<td><div class='checkbox-con'><span><input type='checkbox' class='ipt-hide' name='"+reviewbeans[i].url+"'/><label  class='checkbox' value='"+reviewbeans[i].rowkey+","+reviewbeans[i].urlindexkey+","+reviewbeans[i].url+"'></label ></span></div></td>"
+										html += "<td><a class='deleteforbidden'  value='"
+												+ reviewbeans[i].url
+												+ "' href='javascript:void(0)'>"
+												+ reviewbeans[i].url
+												+ "</a></td>";
+										html += "<td>"
+												+ reviewbeans[i].contenttitle
+												+ "</td>";
+										html += "<td>" + reviewbeans[i].purl
+												+ "</td>";
+										html += "</tr>";
+										$("#reviewList").append(html);
+									}
+								} else {
+									alert(data.msg);
+								}
+
+							},
+							error : function() {
+								alert("error!");
+								flag = true;
+							}
+						});
+			}
+		}
+		
+		var rowkey = new Array();
+		var wrkey = new Array();
+
+		$(document).ready(function() {
+			$("#reviewList").on("click", ".checkbox", function() {
+				var str = $(this).attr("value");
+				var strs = str.split(",");
+				var rk = strs[0];
+				var wk = strs[1];
+				var url = strs[2];
+				var checkVal = $("input[name='"+url+"']").text();
+				if(checkVal == ""){
+					alert("您还没点击url审核路径，请先点击，谢谢！");
+				}else{
+					if($("input[name='"+url+"']").is(':checked')){
+				        $(this).removeClass('cur');
+				        $("input[name='"+url+"']").removeAttr('checked');
+						if (rowkey.length > 0 && wrkey.length > 0) {
+							var indexr = -1;
+							for (var int = 0; int < rowkey.length; int++) {
+								if (rowkey[int] == rk) {
+									indexr = int;
+								}
+							}
+							if (indexr != -1) {
+								rowkey.splice(indexr, 1);
+							}
+							var indexw = -1;
+							for (var int = 0; int < wrkey.length; int++) {
+								if (wrkey[int] == wk) {
+									indexw = int;
+								}
+							}
+							if (indexw != -1) {
+								wrkey.splice(indexw, 1);
+							}
+						}
+						if (rowkey.length == 0) {
+							var tfot = document.getElementById("tfoot");
+							tfot.style.display = "none";
+						}
+				    }
+				    else{
+				        $(this).addClass('cur');
+				        $("input[name='"+url+"']").prop("checked",true);
+						rowkey.push(rk);
+						wrkey.push(wk);
+						$("#tfoot").removeAttr("style");
+				    }
+				}
+				str = "";
+			});
+		});
+		$(document).ready(function() {
+			$("#reviewList").on("click", ".deleteforbidden", function() {
+				var url = $(this).attr("value");
+				window.open(url); 
+				$("input[name='"+url+"']").text("secusses");
+			});
+		});
+
+		function search() {
+			page = 1;
+			flag = false;
+			reviewsearch();
+		}
+
+		function nextPage() {
+			page++;
+			flag = false;
+			reviewsearch();
+		}
+		function submitreview() {
+			if (rowkey.length < 1 && wrkey.length < 1) {
+				alert("请选择 需要提交的审核");
+			} else {
+				$.ajax({
+					type : "post",
+					url : basePath + "/reviewpages/isreview.do",
+					data : {
+						"rowkey" : rowkey.toString(),
+						"wrkey" : wrkey.toString()
+					},
+					success : function(data) {
+						if (data.state == "error") {
+							window.parent.location.href = basePath
+									+ "/index.jsp";
+						}
+						if (data.state == false) {
+							alert(data.msg)
+						} else if (data.state == true) {
+							var reviewbeans = data.data;
+							for ( var i in reviewbeans) {
+								var uid = reviewbeans[i];
+								$("#" + uid).remove();
+							}
+							alert(data.msg);
+						} else {
+							alert(data.msg);
+						}
+					},
+					error : function(data) {
+						alert(data.msg);
+						window.parent.location.href = basePath + "/index.jsp";
+					}
+				});
+				rowkey.length = 0;
+				wrkey.length = 0;
+				var tfot = document.getElementById("tfoot");
+				tfot.style.display = "none";
+			}
+		}
+	</script>
+</body>
+</html>

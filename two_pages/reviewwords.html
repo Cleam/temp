@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="format-detection" content="telephone=no">
+    <meta charset="UTF-8">
+    <meta name="description" content="CMS后台管理系统">
+    <meta name="keywords" content="CMS,后台管理,系统">
+    <title>CMS后台管理系统</title>
+    <!-- CSS -->
+    <link href="superadmin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="superadmin/css/animate.min.css" rel="stylesheet">
+    <link href="superadmin/css/font-awesome.min.css" rel="stylesheet">
+    <link href="superadmin/css/form.css" rel="stylesheet">
+    <link href="superadmin/css/calendar.css" rel="stylesheet">
+    <link href="superadmin/css/media-player.css" rel="stylesheet">
+    <link href="superadmin/css/style.css" rel="stylesheet">
+    <link href="superadmin/css/icons.css" rel="stylesheet">
+    <link href="superadmin/css/generics.css" rel="stylesheet">
+    <link href="js/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+    <link href="superadmin/css/page.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Breadcrumb -->
+    <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Library</a></li>
+        <li class="active">Data</li>
+    </ol>
+    <h4 class="page-title">关键字屏蔽</h4>
+    <div class="container-wrap">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-md-1 col-sm-2 col-xs-4 control-label" for="keywords">关键字：</label>
+                <div class="col-md-6 col-sm-6 col-xs-8">
+                    <input type="text" class="form-control" name="keywords" id="keywords" placeholder="关键字">
+                </div>
+            </div>
+            <div class="form-group mb10">
+                <label for="" class="col-md-1 col-sm-2 col-xs-4 control-label">屏蔽状态：</label>
+                <div class="col-md-6 col-sm-6 col-xs-8">
+                    <label class="radio-inline">
+                        <input type="radio" name="shield" value="1"> 屏蔽
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="shield" value="0"> 不屏蔽
+                    </label>
+                </div>
+            </div>
+            <div class="form-group mb10">
+                <label for="" class="col-md-1 col-sm-2 col-xs-4 control-label">屏蔽等级：</label>
+                <div class="col-md-6 col-sm-6 col-xs-8">
+                    <select name="shieldRank" class="form-control">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-1 col-sm-offset-2 col-xs-offset-4 col-md-6 col-sm-6 col-xs-8">
+                    <button type="submit" class="btn btn-alt">确定</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <h4 class="page-title">关键词查询</h4>
+
+    <div class="container-wrap">
+		<form class="form-inline">
+		  	<div class="form-group mb10">
+		  		<label class="sr-only" for="kw2">关键字：</label>
+		    	<input type="text" class="form-control" id="kw2" placeholder="关键字">
+		  	</div>
+		 	<div class="form-group mb10">
+	            <label for="" class="sr-only">屏蔽状态：</label>
+	            <label class="radio-inline">
+	                <input type="radio" name="shield" value="1"> 屏蔽
+	            </label>
+	            <label class="radio-inline">
+	                <input type="radio" name="shield" value="0"> 不屏蔽
+	            </label>
+			  	<button type="submit" class="btn btn-alt m115">搜索</button>
+	        </div>
+		</form>
+		
+		<!-- 方案一 -->
+		<!-- <table class="table table-striped">
+			<thead>
+				<tr><th>操作用户</th><th>新增日期</th><th>关键字</th><th>屏蔽状态</th><th>操作</th></tr>
+			</thead>
+			<tbody>
+				<tr><td>张三</td><td>2.16-04-09 21:02</td><td>赚钱</td><td>已屏蔽</td><td><a>不屏蔽</a></td></tr>
+				<tr><td>李四</td><td>2.16-04-07 21:02</td><td>踢馆</td><td>已屏蔽</td><td><a>不屏蔽</a></td></tr>
+				<tr><td>王五</td><td>2.16-04-08 21:02</td><td>钱包</td><td>未屏蔽</td><td><a>屏蔽</a></td></tr>
+				<tr><td>赵六</td><td>2016-04-09 21:02</td><td>赚钱</td><td>已屏蔽</td><td><a>不屏蔽</a></td></tr>
+			</tbody>
+		</table> -->
+
+
+		<!-- 方案二 -->
+		<div class="words-wrap">
+			<div class="section">
+				<p class="line1"><span>赚钱</span><span>已屏蔽</span><span>张三</span></p>
+				<p class="line2"><span>操作日期：2016-04-05 21:02</span></p>
+				<button class="btn btn-alt opt">不屏蔽</button>
+			</div>
+			<div class="section">
+				<p class="line1"><span>踢馆</span><span>未屏蔽</span><span>李四</span></p>
+				<p class="line2"><span>操作日期：2016-04-06 21:02</span></p>
+				<button class="btn btn-alt opt">屏蔽</button>
+			</div>
+			<div class="section">
+				<p class="line1"><span>钱包</span><span>已屏蔽</span><span>王五</span></p>
+				<p class="line2"><span>操作日期：2016-04-09 21:02</span></p>
+				<button class="btn btn-alt opt">不屏蔽</button>
+			</div>
+			<!-- 分页 -->
+			<div class="pagination">
+				<a class="prev-page disable">上一页</a><a class="next-page">下一页</a>
+			</div>
+		</div>
+
+		
+
+    </div>
+	
+
+
+
+
+
+
+    <!-- Javascript Libraries -->
+    <!-- jQuery -->
+    <script src="superadmin/js/jquery.min.js"></script>
+    <!-- jQuery Library -->
+    <!-- Bootstrap -->
+    <script src="superadmin/js/bootstrap.min.js"></script>
+    <!-- UX -->
+    <script src="superadmin/js/scroll.min.js"></script>
+    <!-- Custom Scrollbar -->
+    <!-- Other -->
+    <script src="superadmin/js/calendar.min.js"></script>
+    <!-- Calendar -->
+    <script src="superadmin/js/feeds.min.js"></script>
+    <!-- News Feeds -->
+    <!-- All JS functions -->
+    <script src="superadmin/js/functions.js"></script>
+    <script type="text/javascript" src="js/WdatePicker.js"></script>
+    <script src="superadmin/js/select.min.js"></script>
+    <script src="superadmin/js/icheck.js"></script>
+    <script type="text/javascript">
+    /*$(document).ready(function() {
+
+        $("#reviewwordsList").on("click", ".deleteforbidden", function() {
+            var str = $(this).attr("value");
+            console.log(str);
+            var strs = str.split(",");
+            var rowkey = strs[0];
+            var inuse = strs[1];
+            $.ajax({
+                type: "post",
+                url: basePath + "/reviewwords/deletereviewwords.do",
+                data: {
+                    "rowKey": rowkey,
+                    "inuse": inuse
+                },
+                success: function(data) {
+                    alert(data.msg);
+                    reviewwordssearch();
+                },
+                error: function(data) {
+                    alert(data.msg);
+                    window.parent.location.href = basePath + "/index.jsp";
+                }
+            })
+        })
+        str = "";
+    });
+
+    var page = 1;
+    var pagesize = 4;
+    var basePath = "${pageContext.request.contextPath }";
+    var pagecount = 0;
+    var flag = true;
+    //回车查询
+    function on_return() {
+        if (event.keyCode == 13) {
+            search()
+        }
+    }
+
+    //查询
+    function reviewwordssearch() {
+        var rowKey = $("#rowKey").val();
+        var check = $("input[name=check]:checked").val();
+        $("#reviewwordsList").html("");
+        $
+            .ajax({
+                type: "POST",
+                url: basePath + "/reviewwords/queryreviewwords.do",
+                data: {
+                    "rowKey": rowKey,
+                    "inuse": check
+                },
+                dataType: "json",
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                success: function(data) {
+                    flag = true;
+
+                    if (data.state == "error") {
+                        window.parent.location.href = basePath + "/index.jsp";
+                    }
+
+                    if (data.state == false) {
+                        alert(data.msg)
+                    } else if (data.state == true) {
+                        $("#currentPage").html(page);
+                        var beanList = data.data;
+                        console.log(beanList);
+                        pagecount = Math.ceil(beanList.length / pagesize);
+                        if (pagecount == 0) {
+                            $("#total").text(1);
+                        } else {
+                            $("#total").text(pagecount);
+                        }
+                        var html = "";
+                        if (beanList.length > pagesize) {
+                            $("#front").attr("disabled", "disabled");
+                            $("#next").removeAttr("disabled");
+                        } else {
+                            $("#next").attr("disabled", "disabled");
+                            $("#front").attr("disabled", "disabled");
+                        }
+                        var index = 0; //开始下标
+                        for (var j = 1; j <= pagecount; j++) { //页数
+                            for (var i = index; i < beanList.length; i++) { //数据
+                                html = ""; //初始化
+                                if (i >= pagesize * j) {
+                                    index = pagesize * j;
+                                    break;
+                                }
+                                var name = pagesize + j;
+                                if (j == 1) {
+                                    html += "<tr name='" + name + "'>";
+                                    html += "<td>" + beanList[i].addUser + "</td>";
+                                    html += "<td>" + beanList[i].addDate + "</td>";
+                                    html += "<td>" + beanList[i].keyWord + "</td>";
+                                    html += "<td>" + beanList[i].inuseName + "</td>";
+                                    if (beanList[i].inuse == "0") {
+                                        html += "<td >" + "<a class='deleteforbidden'  value='" + beanList[i].keyWord + "," + beanList[i].inuse + "' href='javascript:void(0)'>屏蔽</a>" + "</td>";
+                                    } else {
+                                        html += "<td >" + "<a class='deleteforbidden'  value='" + beanList[i].keyWord + "," + beanList[i].inuse + "' href='javascript:void(0)'>取消屏蔽</a>" + "</td>";
+                                    }
+                                    html += "</tr>";
+                                    $("#reviewwordsList").append(html);
+                                } else {
+                                    html += "<tr name='" + name + "' style='display:none'>";
+                                    html += "<td>" + beanList[i].addUser + "</td>";
+                                    html += "<td>" + beanList[i].addDate + "</td>";
+                                    html += "<td>" + beanList[i].keyWord + "</td>";
+                                    html += "<td>" + beanList[i].inuseName + "</td>";
+                                    if (beanList[i].inuse == "0") {
+                                        html += "<td >" + "<a class='deleteforbidden'  value='" + beanList[i].keyWord + "," + beanList[i].inuse + "' href='javascript:void(0)'>屏蔽</a>" + "</td>";
+                                    } else {
+                                        html += "<td >" + "<a class='deleteforbidden'  value='" + beanList[i].keyWord + "," + beanList[i].inuse + "' href='javascript:void(0)'>取消屏蔽</a>" + "</td>";
+                                    }
+                                    html += "</tr>";
+                                    $("#reviewwordsList").append(html);
+                                }
+
+                            }
+                        }
+
+                    } else {
+                        alert(data.msg);
+                    }
+
+                },
+                error: function() {
+                    alert("error!");
+                    flag = true;
+                }
+            });
+        $("#rowKey").val("");
+    }
+
+    function search() {
+        page = 1;
+        flag = false;
+        reviewwordssearch();
+    }
+
+    function nextPage() {
+        $("#front").removeAttr("disabled");
+        var namehide = pagesize + (page);
+        var trhide = document.getElementsByName(namehide);
+        for (var int = 0; int < trhide.length; int++) {
+            var array_element = trhide[int];
+            array_element.style.display = 'none';
+        }
+
+        page++;
+        var nameshow = pagesize + page;
+        $("tr[name=" + nameshow + "]").removeAttr("style");
+        if (page == pagecount) {
+            $("#next").attr("disabled", "disabled");
+        }
+        $("#currentPage").text(page);
+    }
+
+    function frontPage() {
+        $("#next").removeAttr("disabled");
+        var namehide = pagesize + (page);
+        var trhide = document.getElementsByName(namehide);
+        for (var int = 0; int < trhide.length; int++) {
+            var array_element = trhide[int];
+            array_element.style.display = 'none';
+        }
+
+        page--;
+        var nameshow = pagesize + page;
+        $("tr[name=" + nameshow + "]").removeAttr("style");
+        if (page == 1) {
+            $("#front").attr("disabled", "disabled");
+        }
+        $("#currentPage").text(page);
+    }
+
+    function go() {
+        var goPage = parseInt($("#goPage").val());
+        for (var i = 1; i <= pagecount; i++) {
+            if (i == goPage) {
+                var nameshow = pagesize + i;
+                $("tr[name=" + nameshow + "]").removeAttr("style");
+            } else {
+                var namehide = pagesize + (i);
+                var trhide = document.getElementsByName(namehide);
+                for (var int = 0; int < trhide.length; int++) {
+                    var array_element = trhide[int];
+                    array_element.style.display = 'none';
+                }
+            }
+        }
+
+        if (goPage == 1) {
+            $("#front").attr("disabled", "disabled");
+            $("#next").removeAttr("disabled");
+        } else if (goPage == pagecount) {
+            $("#front").removeAttr("disabled");
+            $("#next").attr("disabled", "disabled");
+        }
+        page = goPage
+        $("#currentPage").text(page);
+        $("#goPage").val("");
+    }
+
+    $("#addbtn")
+        .click(
+            function() {
+                var keyWord = $("#keyWord").val();
+                var check = $("input[name=inuse]:checked").val();
+                if (keyWord == "") {
+                    alert("请填写需要新增的关键字");
+                } else {
+                    $
+                        .ajax({
+                            type: "post",
+                            url: basePath + "/reviewwords/addreviewwords.do",
+                            data: {
+                                "keyWord": keyWord,
+                                "inuse": check
+                            },
+                            dataType: "json",
+                            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                            success: function(data) {
+                                if (data.state == false) {
+                                    alert(data.msg)
+                                } else if (data.state == true) {
+                                    alert(data.msg);
+                                }
+                            },
+                            error: function() {
+                                alert("error!");
+                                window.parent.location.href = basePath + "/index.jsp";
+                            }
+                        });
+                }
+                $("#keyWord").val("");
+            });*/
+    </script>
+</body>
+
+</html>

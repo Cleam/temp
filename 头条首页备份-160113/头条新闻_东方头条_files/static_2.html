@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0053)http://cdn.zampdsp.com/v3/static/scripts/static_2.htm -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+<style type="text/css">
+	body{margin:0;padding:0;font-size:12px;font-family:Arial;background:transparent;width:100%;height:100%;}
+	img{border:0;}
+	.container{width:100%;height:100%;position:absolute;overflow:hidden;left:50%;top:50%;background:#fff;}
+	.disp{width:100%;height:100%;position:absolute;left:0px;top:0px;}
+</style></head>
+
+<body>
+<script type="text/javascript">
+<!--
+
+function _getTrueSize(_w1,_h1,_w2,_h2,_isCut){
+	var _scale1=_w1/_h1
+		,_scale2=_w2/_h2
+		,_tw=_w2
+		,_th=_h2
+	if(_scale1>_scale2){
+		if(!_isCut){
+			if(_h2>_h1){
+				_th=_h1;
+				_tw=Math.round(_h1*_scale2);
+			}else{
+				_th=_h2;
+				_tw=Math.round(_h2*_scale2);
+			}
+		}else{
+			if( _w2>_w1){
+				_tw=_w1;
+				_th=Math.round(_w1/_scale2);
+			}else{
+				_tw=_w2;
+				_th=Math.round(_w2/_scale2);
+			}
+		}
+	}
+	if(_scale1<=_scale2){
+		if(!_isCut){
+			if( _w2>_w1){
+				_tw=_w1;
+				_th=Math.round(_w1/_scale2);
+			}else{
+				_tw=_w2;
+				_th=Math.round(_w2/_scale2);
+			}
+		}else{
+			if(_h2>_h1){
+				_th=_h1;
+				_tw=Math.round(_h1*_scale2);
+			}else{
+				_th=_h2;
+				_tw=Math.round(_h2*_scale2);
+			}
+		}
+	}
+	return [_tw,_th];
+}
+var _mSize=_getTrueSize(parent.__init.w,parent.__init.h,parent.__init.resizeInfo.w,parent.__init.resizeInfo.h);
+document.write('<div class="container" style="width:'+_mSize[0]+'px;height:'+_mSize[1]+'px;margin-left:-'+parseInt(_mSize[0]/2)+'px;margin-top:-'+parseInt(_mSize[1]/2)+'px"><zpshow class="disp" titlemark="1"></zpshow></div>');
+
+//-->
+</script><div class="container" style="width:640px;height:60px;margin-left:-320px;margin-top:-30px"><a href="http://click.tanx.com/ct?tanx_k=193&amp;tanx_e=3t7rcGJrAiwsBT3I6PmK%2fKOsnyqGMvmVpRzXGGvw377hUJdffUILl8wPS1d6kcgo2bKvuhmGuFRBLAkmjXvy%2bqX3H9h77tFFtDjxl9Ftr2SSUE1Yr%2bc2ie3jJZ%2b7mxCENF6djs84olJAkQBbkIH9l9pHE8sSVnSn8p%2bWeT%2faQq2rDcFSi11IohpDZw73WxZ0&amp;tanx_u=http%3A%2F%2Fut.gtags.net%2Ftms%2Fc3%3Fp%3D23%26mk%3DopuzYKYWTEk-wNFldUObFYzmY-g3HYe2DG4QjtvSlo_3ObXcnp2NEPMJO88X2Z1igEqfvFEuAGjlQhm8KMQwNek6eVGx11-H-NHKEvMpg7rOkUGwGRxr98taNwixzx1zR-Sy5Nwo-tJUzeVVU0Vd-8UJooLnr91miUBAMYgVx6dDUvb5TuiAn2UuhEFdqQ5VgjRxdCy3b0_J8XUFPLr4uxAB5CxV23ZV8h4xh217DLwBUgd0wzJ18Ww428qPSx1s1HSsFLd4w4h7pdCRK45b_yfIKYAPYlYXCho_r6JFPVy8mn5DZB2bxOvFf5ICzM224mesLFHWBfQ%26t%3D2%26mat%3D1303512189105080946%26url%3Dhttp%253A%252F%252Fwww.kx.cn%252F%253Ffrom%253Ddsp%2526utm_source%253Dsydsp%2526utm_campaign%253D%2525E4%2525BA%2525BA%2525E7%2525BE%2525A4%2525E5%25258C%252585%2525E6%25258A%252595%2525E6%252594%2525BE%2526utm_adgroup%253D%2525E7%2525AB%25259E%2525E5%252593%252581URL%2525E4%2525BA%2525BA%2525E7%2525BE%2525A4%2526utm_term%253D%2525E7%2525AB%25259E%2525E5%252593%252581URL%2525E4%2525BA%2525BA%2525E7%2525BE%2525A4%2526utm_medium%253Dsydsp" target="_blank"><img src="1303512189105080946_d_640_60_687997420.jpg" class="disp" titlemark="1"></a></div>
+<script type="text/javascript">
+<!--
+parent.__start();
+//-->
+</script>
+
+
+</body></html>
