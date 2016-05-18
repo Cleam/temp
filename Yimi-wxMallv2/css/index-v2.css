@@ -1,0 +1,71 @@
+
+.font-maincolor {
+  color: #1d384b; }
+
+header span.logo {
+  width: 80px;
+  height: 44px;
+  background: url(../images/logo.png) no-repeat center;
+  background-size: 100% auto; }
+
+header .menu {
+  font-size: 1.5rem;
+  position: relative; }
+header .menu .arrow {
+    width: 20px;
+    height: 44px;
+    position: relative; }
+header .menu .arrow::after {
+      width: 8px;
+      height: 8px;
+      transform: rotate(135deg);
+      -webkit-transform: rotate(135deg);
+      left: 8px;
+      top: 4px;
+      border-width: 1px; }
+header .menu .arrow2::after {
+    top: 8px;
+      transform: rotate(-45deg);
+      -webkit-transform: rotate(-45deg);
+}
+#banner::before{
+  width: 100%;
+  display: block;
+  content: '';
+  padding-top: 37.067%;
+}
+.banner-wrapper{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+ }
+/*.floor-wrapper{
+    box-sizing: border-box;
+    width: 120%;
+    padding-right:10%;
+ }*/
+.info-box{
+  background-color: #f9fbfb;
+  padding: 25px 10px;
+  text-align: center;
+  color: #4A525D;
+  font-size: 1.2rem 
+}
+.info-box p{
+  padding: 3px 0
+}
+.tap-vs{
+  padding: 5px 10px;
+  margin-top: 2px;
+}
+.tap-vs p,.tap-vs span{
+  display: inline-block;
+  font-size: 1.4rem;
+  color: #AFC1CB;
+  padding: 0 10px;
+}
+.tap-vs p.on{
+  color: #E88671
+}

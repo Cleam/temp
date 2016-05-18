@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>搜索</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1.0, maximum-scale=1, user-scalable=no"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="screen-orientation" content="portrait">
+  <meta name="x5-orientation" content="portrait">
+  <meta name="format-detection" content="telephone=no" />
+   <link type="text/css" rel="stylesheet" href="../css/swiper.min.css">
+  <link type="text/css" rel="stylesheet" href="../css/public-v2.css">
+  <link type="text/css" rel="stylesheet" href="../css/common-v2.css">
+  <link type="text/css" rel="stylesheet" href="../css/common-layout.css">
+  <link type="text/css" rel="stylesheet" href="../css/search.css">
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
+ <script type="text/javascript" src="../js/jquery.lazyload.js"></script>
+
+<style type="text/css">
+
+</style>
+</head>
+<body>
+  <!--header开始-->
+<section class="search-box box">
+    <div class="c-input boxflex-one">
+        <label class="iconfont search-icon"></label>
+        <input id="text" type="text" placeholder="请输入商户名称">
+        <span class="c-close-btn"><i></i></span>
+    </div>
+    <div class="btn-box"><p id="searchBtn">取消</p></div>
+</section>
+<div class="scroll-box"><div class="scroll"><div id="disp" class="page-content pt61">
+
+                <section id="history" class="history-search">
+                    <h3 class="history-title">历史搜索</h3>
+                    
+                    <p class="js-search">1444556</p>
+                    
+                    <div class="history-clear">
+                        <span id="rmHis">删除历史搜索</span>
+                    </div>
+                </section>
+                </div></div></div>
+<div class="article-all">
+  <button class="ui-btn-m btn-primary">按钮</button>
+  <button class="ui-btn-m btn-warn">按钮</button>
+  <button class="ui-btn-m btn-denger">按钮</button>
+  <button class="ui-btn-m btn-gray">按钮</button>
+   <button class="ui-btn-m-nbg">按钮</button>
+   <p class="lightGray">浅灰</p>
+   <p class="gray">字的颜色：灰</p>
+   <p class="green bold">字的颜色：绿</p>
+   <p class="pink bold">字的颜色：粉</p>
+   <p class="yellow bold">字的颜色：huang</p>
+</div>
+<div class="height52"></div>
+<footer id="footer">
+  <div class="nav-list">
+    <ul id="ul">
+      <li id="index " class="current">
+        <span class="footer-index"></span>
+        <p>首页</p>
+      </li>
+      <li id="footer-callcenter ">
+        <span class="footer-callcenter"></span>
+        <p>客服</p>
+      </li>
+      <li id="footer-activity">
+        <span class="footer-activity"></span>
+        <p>活动</p>
+      </li>
+      <li id="shoppingcartList">
+        <span class="footer-shoppingcart"></span>
+        <p>购物篮</p>
+      </li>
+      <li id="personal">
+        <span class="footer-personal"></span>
+        <p>我的</p>
+      </li>
+    </ul>
+  </div>
+</footer>
+
+<script src="../js/swiper.min.js"></script>
+<script type="text/javascript">
+var adverSlide = new Swiper('.classify',{
+                slidesPerView: 4.7,
+                spaceBetween: 5,
+                paginationClickable: true,
+                freeMode: true,
+                slidesOffsetAfter :10,
+            });
+    $('.menu').on('click',function(){
+        $('#classify').slideToggle();
+        $(this).find("i").toggleClass('arrow2');
+         //分类水平滑动
+          var adverSlide = new Swiper('.classify',{
+                slidesPerView: 4.7,
+                spaceBetween: 5,
+                paginationClickable: true,
+                freeMode: true,
+                slidesOffsetAfter :10,
+            });
+
+
+    })
+</script>
+<script>
+// 代码整理：懒人之家 www.lanrenzhijia.com
+$(function(){   
+    var cubuk_seviye = $(document).scrollTop();  //屏幕滚动距离
+    var header_yuksekligi = $('.yapiskan').outerHeight(); //元素高度
+
+    $(window).scroll(function() {
+        var kaydirma_cubugu = $(document).scrollTop();
+
+        if (kaydirma_cubugu > header_yuksekligi){$('.yapiskan').addClass('gizle');} 
+        else {$('.yapiskan').removeClass('gizle');}
+
+        if (kaydirma_cubugu > cubuk_seviye){$('.yapiskan').removeClass('sabit');} 
+        else {$('.yapiskan').addClass('sabit');}                
+
+        cubuk_seviye = $(document).scrollTop(); 
+     });
+});
+</script>
+<script type="text/javascript">
+         //轮播图
+            var mySwiper = new Swiper('#banner',{
+                loop: true,
+                autoplay: 3000,
+                pagination:'.swiper-pagination',
+                paginationClickable:true,
+                autoplayDisableOnInteraction:false
+            });
+            //图片水平滑动
+          var productSlide = new Swiper('#side1',{
+                slidesPerView:3,
+                paginationClickable: true,
+                spaceBetween: 10,
+                freeMode: true,
+                slidesOffsetBefore : 10,
+                slidesOffsetAfter :10,
+            });
+          //热销
+          var productSlide = new Swiper('#hot-sale',{
+                slidesPerView:2.5,
+                paginationClickable: true,
+                spaceBetween: 10,
+                freeMode: true,
+                slidesOffsetBefore : 10,
+                slidesOffsetAfter :10,
+            });
+          //广告位水平滑动
+          var adverSlide = new Swiper('.adver-slide',{
+                slidesPerView:2.3,
+                paginationClickable: true,
+                spaceBetween: 10,
+                freeMode: true,
+                slidesOffsetBefore : 10,
+                slidesOffsetAfter :10,
+            });
+         
+    //二级分类水平滑动
+          var adverSlide = new Swiper('.sub-classify',{
+                slidesPerView: 4.7,
+                spaceBetween: 5,
+                paginationClickable: true,
+                freeMode: true,
+                slidesOffsetBefore : 10,
+                slidesOffsetAfter :10,
+            });
+          
+            
+    </script>
+   
+   <script type="text/javascript">
+       $(function(){
+        $('.turn').on('click',function(){
+            if($(this).hasClass('turn-around-a')){
+               
+                $(this).removeClass('turn-around-a').removeClass('turn-around');
+           
+            }else{
+                $(this).addClass('turn-around-a').addClass('turn-around');
+            }
+        
+    })
+
+})
+   </script>
+</body>
+</html>

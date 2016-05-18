@@ -1,0 +1,35 @@
+
+/*header nav*/
+
+
+
+/*header nav end*/
+
+/*footer*/
+.footer{
+	width:100%;
+	height:4rem;
+	background-color:rgba(95,95,95,.9);
+	position:fixed;
+	bottom:0;
+	left:0	
+}
+.footer ul li{
+	width:20%;
+	float:left;
+	text-align:center;
+	line-height:1rem;
+	margin-top:.4rem
+}
+.footer ul li img{
+	width:30%;
+}
+.footer ul li p{
+	font-size:.9rem;
+	color:#fff;
+	line-height: 1.2rem;
+}
+.footer .on p{
+	color:#f5a623
+}
+/*footer end*/

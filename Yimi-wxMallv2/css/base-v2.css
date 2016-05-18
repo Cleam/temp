@@ -1,0 +1,135 @@
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td,
+section,
+article,
+aside,
+header,
+footer,
+nav,
+dialog,
+figure,
+hgroup,
+em,
+button,
+a,
+input {
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  outline: none; }
+
+p,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+tr,
+th,
+td,
+dt,
+dd,
+div {
+  word-wrap: break-word;
+  -webkit-user-select: none;
+  user-select: none; }
+
+html {
+  -webkit-text-size-adjust: none;
+  font-size: 100px; }
+
+body {
+  position: relative;
+  min-width: 320px;
+  background-color: #fff;
+  font-size: 13px;
+  color: #1b374b;
+  -webkit-text-size-adjust: 100%; }
+
+body, select, input, pre, iframe {
+  font-family: "Helvetica Neue","Hiragino Sans GB W3","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif; }
+
+ul, ol, li {
+  list-style: none; }
+
+em, i {
+  font-style: normal; }
+
+img {
+  width: 100%;
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+  -webkit-interpolation-mode: bicubic; }
+
+table {
+  border-collapse: collapse;
+  text-align: center; }
+
+button {
+  border: none;
+  color: #fff;
+  line-height: 100%;
+  font-family: 'Microsoft YaHei'; }
+
+select {
+  outline: none; }
+
+::-webkit-scrollbar {
+  width: 0;
+  opacity: 0; }
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 0, 0);
+  opacity: 0; }
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 0, 0);
+  opacity: 0; }
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(255, 255, 0, 0);
+  opacity: 0; }
+
+input[type='text'],
+input[type='tel'],
+input[type='password'] {
+  font-size: 14px;
+  color: #7d7d7d;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-appearance: none; }
+  input[type='text']::-webkit-input-placeholder,
+  input[type='tel']::-webkit-input-placeholder,
+  input[type='password']::-webkit-input-placeholder {
+    color: #ccc; }
+
+a {
+  text-decoration: none; }
+
+a:active {
+  background-color: none; }
